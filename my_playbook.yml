@@ -1,0 +1,9 @@
+- hosts: localhost
+  tasks:
+  - name: Install git
+    yum: name=git state=latest
+    become: yes
+    become_method: sudo
+
+  - name: Get git repository
+    git: repo=https://github.com/Sharona111/Sharona_rep dest=~/Scripts

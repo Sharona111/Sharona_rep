@@ -1,0 +1,24 @@
+- hosts: localhost
+  tasks:
+  - name: Install git
+    yum: name=git state=latest
+    become: yes
+    become_method: sudo
+
+#  - name: Get git repository
+#    git: repo=https://github.com/Sharona111/Sharona_rep dest=~/Scripts
+
+  - name: Get Maven url
+    get_url: url=http://apache.mivzakim.net/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz dest=/var/tmp
+
+  - name: Unzip maven
+    unarchive: src=/var/tmp/apache-maven-3.3.9-bin.tar.gz dest=~/
+
+  - name: update env maven
+    lineinfile: dest=~/.bash_profile regexp='^M2_HOME.*' line='M2_HOME=~/apache-maven-3.3.9' insertbefore='^PATH.*'
+
+  - name: update bin maven
+    lineinfile: dest=~/.bash_profile regexp='^M2=.*' line='M2=$M2_HOME/bin' insertbefore='^PATH.*'
+
+  - name: update PATH
+    lineinfile: dest=~/.bash_profile regexp='^PATH.*' line='PATH=$PATH:$M2'
