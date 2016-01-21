@@ -26,4 +26,4 @@
     lineinfile: dest=~/.bash_profile regexp='^PATH.*' line='PATH=$PATH:$M2'
 
   - name: copy template
-    template: src=~/settings.xml dest=$M2_HOME/conf
+    template: src=~/Scripts/settings.xml dest=/home/ec2-user/apache-maven-3.3.9/conf
