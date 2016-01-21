@@ -1,4 +1,6 @@
 - hosts: localhost
+  vars:
+      IP_ADDR: 172.31.0.42
   tasks:
   - name: Install git
     yum: name=git state=latest
@@ -22,3 +24,6 @@
 
   - name: update PATH
     lineinfile: dest=~/.bash_profile regexp='^PATH.*' line='PATH=$PATH:$M2'
+
+  - name: copy template
+    template: src=~/settings.xml dest=$M2_HOME/conf
